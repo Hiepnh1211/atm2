@@ -11,11 +11,12 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "card_info")
+@SecondaryTable(name = "user_info", pkJoinColumns = @PrimaryKeyJoinColumn(name = "user_name"))
 public class Card {
     @Id
     @Column(name = "card_number", unique = true)
     private long cardNumber;
-    @Column(name = "card_holder_name")
+    @Column(name = "card_holder_name", insertable=false, updatable=false)
     private String cardHolderName;
     @Column(name = "cvv")
     private String cvv;
@@ -29,6 +30,12 @@ public class Card {
     private LocalDate expirationDate = LocalDate.now().plusYears(3);
     @Column(name = "card_status")
     private String cardStatus;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(referencedColumnName = "user_name", name = "card_holder_name", nullable = false)
+    private User user;
+    @OneToMany(mappedBy = "card", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private List<Transaction> transactionList;
     public Card(){}
 
     public Card(long cardNumber, String cardHolderName, String cvv, double spendingLimit, double balance, LocalDate creationDate, LocalDate expirationDate, String cardStatus) {
@@ -41,6 +48,5 @@ public class Card {
         this.expirationDate = expirationDate;
         this.cardStatus = cardStatus;
     }
-    @OneToMany(targetEntity = Transaction.class)
-    private List<Transaction> transactionList;
+
 }

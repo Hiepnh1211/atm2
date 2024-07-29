@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Withdraw</title>
+</head>
+<body>
+    <form action="/withdraw" method="post" th:object="${transaction}">
+        <p th:text="${session.debitCard.cardNumber}"></p>
+        <p th:text="${session.debitCard.getUser().getBalance()}"></p>
+        <label for="amount">Withdraw amount</label>
+        <input type="text" id="amount" name="amount">
+        <input type="submit" value="Withdraw">
+        <!--        <button onclick="window.location.assign('/user_menu')">Back</button>-->
+    </form>
+    <th:block th:switch="${session.message}">
+        <div th:case="'Transaction limit reached, please try again tomorrow'">
+            <p style="color: #ff0a00" th:text="${session.message}"></p>
+        </div>
+        <div th:case="'Withdrawing amount is too large'">
+            <p style="color: #ff0a00" th:text="${session.message}"></p>
+        </div>
+        <div th:case="'Transaction success'">
+            <p style="color: #18ff1e" th:text="${session.message}"></p>
+            <p>Deposit Information: <p><br>
+            <label for="transactionInfo">Transaction ID:</label>
+            <p id="transactionInfo" th:text="${session.debitDepositInfo.getTransactionId()}"></p> <br>
+            <label for="transactionAmount">Deposit Amount:</label>
+            <p style="color: #ff0a00" id="transactionAmount" th:text="${session.debitDepositInfo.getAmount()}"></p> <br>
+        </div>
+    </th:block>
+    <button id="go-back">Back</button>
+    <script>
+        document.getElementById("go-back").addEventListener("click", () => {
+            history.back();
+        });
+    </script>
+</body>
+</html>

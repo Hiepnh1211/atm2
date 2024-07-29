@@ -19,9 +19,6 @@ public class CardServices {
     @Autowired
     private Utilities utilities;
     Random random = new Random();
-    public List<Card> listAll() {
-        return cardRepository.findAll();
-    }
     public Card findCardById(long id){
         return cardRepository.findById(Long.valueOf(String.valueOf(id))).get();
     }

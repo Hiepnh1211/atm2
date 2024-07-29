@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Card List</title>
+</head>
+<body>
+    <form action="/user_menu" method="post">
+        <p>Card List</p>
+        <p th:text="${user.name}"></p>
+        <p th:text="${user.role}"></p>
+        <label for="card_list">Debit Card list</label>
+        <select id="card_list" name="cardNumber">
+            <option th:each="card : ${cardList}" th:text="${card.cardNumber}"></option>
+        </select>
+        <input type="submit" >
+        <button id="go-back">Back</button>
+        <script>
+            document.getElementById("go-back").addEventListener("click", () => {
+                history.back();
+            });
+        </script>
+        <p th:text="${cardError}"/>
+    </form>
+</body>
+</html>

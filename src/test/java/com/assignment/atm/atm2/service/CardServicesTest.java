@@ -1,5 +1,6 @@
 package com.assignment.atm.atm2.service;
 
+import com.assignment.atm.atm2.entity.Card;
 import com.assignment.atm.atm2.entity.Transaction;
 import com.assignment.atm.atm2.repository.CardRepository;
 import com.assignment.atm.atm2.repository.TransactionRepository;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.core.SpringVersion;
 import org.springframework.test.annotation.Rollback;
 
 @DataJpaTest
@@ -80,7 +82,16 @@ class CardServicesTest {
     }
     @Test
     void test4(){
-        System.out.println(userServices.login("NguyenVanBinh1", "8606"));
-
+//        System.out.println(userServices.login("NguyenVanBinh1", "8606"));
+        System.out.println(userServices.getUserByName("NguyenVanBinh1").getCardList().get(0).getCardNumber());
+    }
+    @Test
+    void test5() {
+        System.out.println(cardServices.findCardById(3123456789102365L).getTransactionList());
+    }
+    @Test
+    void test6() {
+        //System.out.println(cardServices.getCardList(userServices.getUserByName("NguyenVanBinh1").getCardList(), Constants.DEBIT_CARD_TYPE));
+        cardServices.creditCardMaking("NguyenVanBinh1", 2000);
     }
 }

@@ -4,7 +4,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -27,6 +30,9 @@ public class User {
     private double balance;
     @Column(name = "role")
     private String role;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    private List<Card> cardList;
 
     public User() {
     }
@@ -41,7 +47,4 @@ public class User {
         this.balance = balance;
         this.role = role;
     }
-
-    @OneToMany(targetEntity = Card.class)
-    private List<Card> cardList;
 }

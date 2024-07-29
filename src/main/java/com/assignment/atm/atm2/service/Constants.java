@@ -4,6 +4,7 @@ public class Constants {
     public static final int ID_NUMBER_LENGTH = 8;
     public static final int ID_PIN_LENGTH = 4;
     public static final double MAXIMUM_TRANSACTION_AMOUNT = 25000;
+    public static final double MAXIMUM_WITHDRAW_AMOUNT = 10000;
     public static final int MAXIMUM_DEPOSIT_WITHDRAW_TIME = 5;
     public static final int MINIMUM_NAME_LENGTH = 4;
     public static final int MAXIMUM_NAME_LENGTH = 50;
@@ -15,6 +16,8 @@ public class Constants {
     public static final String CARD_STATUS_DEACTIVATE = "Deactivate";
     public static final String DEBIT_CARD_TYPE = "Debit";
     public static final String CREDIT_CARD_TYPE = "Credit";
+    public static final String DEBIT_CARD_STARTER = "3";
+    public static final String CREDIT_CARD_STARTER = "4";
     public static final String TRANSACTION_TYPE_DEPOSIT = "Deposit";
     public static final String TRANSACTION_TYPE_WITHDRAW = "Withdraw";
     public static final String ADMIN_ROLE = "Admin";

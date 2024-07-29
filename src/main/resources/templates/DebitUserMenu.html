@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Debit Card User Menu</title>
+</head>
+<body>
+    <p th:text="${session.debitCard.getCardNumber()}"></p>
+    <p th:text="${session.debitCard.getUser().getBalance()}"></p>
+    <p>Welcome to the menu for debit card</p>
+    <form action="/deposit_form">
+        <input type="submit" value="Deposit">
+    </form>
+    <form action="/withdraw_form">
+        <input type="submit" value="Withdraw">
+    </form>
+    <form action="/balance_enquiry">
+        <input type="submit" value="Balance Enquiry">
+    </form>
+    <button id="go-back">Back</button>
+    <script>
+        document.getElementById("go-back").addEventListener("click", () => {
+            history.back();
+        });
+    </script>
+</body>
+</html>

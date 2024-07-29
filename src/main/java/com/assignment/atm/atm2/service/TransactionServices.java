@@ -54,9 +54,7 @@ public class TransactionServices {
         User receiver = userServices.getUserByCardNumber(receiverCardNumber);
         userServices.updateBalance(sender.getUserName(),amount,Constants.FUNCTION_SEND);
         userServices.updateBalance(receiver.getUserName(), amount, Constants.FUNCTION_RECEIVE);
-        Transaction send = transactionMaking(senderCardNumber, Constants.FUNCTION_SEND, amount, sender.getBalance());
-        Transaction receive = transactionMaking(receiverCardNumber, Constants.FUNCTION_RECEIVE, amount, receiver.getBalance());
-        return send;
+        return transactionMaking(senderCardNumber, Constants.FUNCTION_SEND, amount, sender.getBalance());
     }
     public List<Transaction> getTransactionRecord(long id){
         List<Transaction> transactionList = new ArrayList<>();

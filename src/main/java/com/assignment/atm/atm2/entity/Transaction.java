@@ -17,7 +17,7 @@ public class Transaction {
     private int id;
     @Column(name = "transaction_id")
     private String transactionId;
-    @Column(name = "card_number")
+    @Column(name = "card_number", insertable=false, updatable=false)
     private long cardNumber;
     @Column(name = "transaction_type")
     private String transactionType;
@@ -27,6 +27,9 @@ public class Transaction {
     private double amount;
     @Column(name = "balance")
     private double balance;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(referencedColumnName = "card_number", name = "card_number", nullable = false)
+    private Card card;
     public Transaction(){
 
     }

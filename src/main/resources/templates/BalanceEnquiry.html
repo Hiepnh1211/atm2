@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Balance Enquiry</title>
+</head>
+<style>
+    table, th, td {
+        border:1px solid black;
+    }
+</style>
+<body>
+    <label for="card_number">Card Number:
+        <span id="card_number" th:text="${session.debitCard.getCardNumber()}"></span>
+    </label> <br>
+    <label for="card_owner">Card Owner:
+        <span id="card_owner" th:text="${session.debitCard.getUser().getName()}"></span>
+    </label> <br>
+    <label for="card_balance">Card Balance:
+        <span id="card_balance" th:text="${session.debitCard.getUser().getBalance()}"></span>
+    </label> <br>
+    <label for="balance_enquiry">Balance Enquiry</label>
+    <table id="balance_enquiry">
+        <tr>
+            <th>Date</th>
+            <th>Transaction type</th>
+            <th>Amount</th>
+        </tr>
+        <tr th:each="transaction : ${session.transactionRecord}">
+            <td th:text="${transaction.getTransactionDate()}"></td>
+            <td th:text="${transaction.getTransactionType()}"></td>
+            <td th:text="${transaction.getAmount()}"></td>
+        </tr>
+    </table>
+    <button id="go-back">Back</button>
+    <script>
+        document.getElementById("go-back").addEventListener("click", () => {
+            history.back();
+        });
+    </script>
+</body>
+</html>

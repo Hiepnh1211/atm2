@@ -11,8 +11,10 @@ import java.time.LocalDate;
 import java.util.List;
 @Repository
 public interface CardRepository extends JpaRepository<Card, Long> {
-    @Query(value = "SELECT card_number FROM card_info WHERE card_number LIKE :type AND card_holder_name = :name", nativeQuery = true)
-    List<Long> getCardList(@Param("type") String type, @Param("name") String name);
+    @Query(value = "SELECT card_number FROM card_info WHERE card_number LIKE '3%' AND card_holder_name = :name", nativeQuery = true)
+    List<Long> getDebitCardList(@Param("name") String name);
+    @Query(value = "SELECT card_number FROM card_info WHERE card_number LIKE '4%' AND card_holder_name = :name", nativeQuery = true)
+    List<Long> getCreditCardList(@Param("name") String name);
     @Query(value = "SELECT user_name FROM user_info WHERE user_name = (SELECT card_info.card_holder_name FROM card_info WHERE card_number = :id)",nativeQuery = true)
     String getUserByCardNumber(@Param("id") long id);
     @Modifying
